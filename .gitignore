@@ -1,0 +1,39 @@
+# Sistema/OS
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+$RECYCLE.BIN/
+
+# IDE/Editor
+.vscode/
+.idea/
+*.code-workspace
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Node/Build
+node_modules/
+dist/
+build/
+.cache/
+.tmp/
+
+# Ambiente
+.env
+.env.*
+
+# Backups/Arquivos grandes
+backups/
+*.zip
+*.7z
+*.tar
+*.gz
+
+# OneDrive temporários
+~$*
+*.tmp
