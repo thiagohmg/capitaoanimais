@@ -25,13 +25,27 @@ try {
   $tag = 'snap-' + (Get-Date -Format 'yyyyMMdd-HHmmss') + '-' + $safeLabel
   try { git tag -f $tag | Out-Null } catch { git tag $tag | Out-Null }
 
-  # ZIP backup completo (exceto .git e backups)
+  # Preparar pasta de staging para zip e evitar locks (ex.: .gitignore em uso)
   if (-not (Test-Path 'backups')) { New-Item -ItemType Directory -Path 'backups' | Out-Null }
-  $zip = Join-Path 'backups' ("site-" + (Get-Date -Format 'yyyyMMdd-HHmmss') + '-' + $safeLabel + '.zip')
-  $items = Get-ChildItem -Force | Where-Object { $_.Name -notin @('.git','backups') }
-  if ($items) {
-    Compress-Archive -Path ($items | ForEach-Object { $_.FullName }) -DestinationPath $zip -Force
+  $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
+  $staging = Join-Path 'backups' ("staging-$stamp")
+  New-Item -ItemType Directory -Path $staging | Out-Null
+
+  $exclude = @('.git','backups','.DS_Store','Thumbs.db')
+  Get-ChildItem -Force | Where-Object { $_.Name -notin $exclude } | ForEach-Object {
+    $dest = Join-Path $staging $_.Name
+    if ($_.PSIsContainer) {
+      Copy-Item -Path $_.FullName -Destination $dest -Recurse -Force
+    } else {
+      Copy-Item -Path $_.FullName -Destination $dest -Force
+    }
   }
+
+  $zip = Join-Path 'backups' ("site-" + $stamp + '-' + $safeLabel + '.zip')
+  Compress-Archive -Path (Join-Path $staging '*') -DestinationPath $zip -Force
+
+  # Limpar staging
+  Remove-Item -Recurse -Force $staging
 
   Write-Host ("Snapshot tag: " + $tag)
   Write-Host ("Backup zip:  " + $zip)

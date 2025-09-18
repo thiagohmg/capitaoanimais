@@ -1,5 +1,49 @@
 // Script moderno para a landing page do Capitão Animais
 
+// Lightbox para imagens dos heróis
+document.addEventListener('DOMContentLoaded', function () {
+  const lightbox = document.getElementById('hero-lightbox');
+  if (!lightbox) return;
+  const imgEl = lightbox.querySelector('.hero-lightbox-image');
+  const backdrop = lightbox.querySelector('.hero-lightbox-backdrop');
+  const btnClose = lightbox.querySelector('.hero-lightbox-close');
+  const body = document.body;
+
+  function openLightbox(src, alt) {
+    if (!src) return;
+    imgEl.src = src;
+    imgEl.alt = alt || '';
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    body.style.overflow = '';
+    imgEl.removeAttribute('src');
+    imgEl.removeAttribute('alt');
+  }
+
+  backdrop.addEventListener('click', closeLightbox);
+  btnClose.addEventListener('click', closeLightbox);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+
+  document.querySelectorAll('.lp-values .hero-card .hero-image').forEach(img => {
+    const container = img.closest('.hero-image-container') || img;
+    const fullSrc = img.dataset.full || img.currentSrc || img.src;
+    const alt = img.getAttribute('alt') || '';
+    const open = (e) => { e.preventDefault(); openLightbox(fullSrc, alt); };
+
+    container.addEventListener('click', open);
+    container.setAttribute('role', 'button');
+    container.setAttribute('tabindex', '0');
+    container.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(fullSrc, alt); }
+    });
+  });
+});
+
 document.addEventListener('DOMContentLoaded', function() {
     // Elementos do DOM
     const header = document.querySelector('header');

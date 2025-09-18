@@ -92,6 +92,10 @@ while ($true) {
     $writer.WriteLine('HTTP/1.1 200 OK')
     $writer.WriteLine('Content-Type: ' + $contentType)
     $writer.WriteLine('Content-Length: ' + $bytes.Length)
+    # Cache-Control: desabilitar cache para HTML/CSS/JS em desenvolvimento
+    $cacheHeader = 'no-cache'
+    if ($ext -eq '.html' -or $ext -eq '.css' -or $ext -eq '.js') { $cacheHeader = 'no-store, must-revalidate' }
+    $writer.WriteLine('Cache-Control: ' + $cacheHeader)
     $writer.WriteLine('Connection: close')
     $writer.WriteLine()
     $writer.Flush()

@@ -486,7 +486,7 @@ textarea.form-control {
 /* Footer */
 footer {
     background-color: var(--dark-bg-lighter);
-    padding: 80px 0 30px;
+    padding: clamp(32px, 6vw, 48px) 0 clamp(16px, 4vw, 24px);
     position: relative;
     overflow: hidden;
 }
@@ -494,8 +494,8 @@ footer {
 .footer-content {
     display: flex;
     flex-wrap: wrap;
-    gap: 60px;
-    margin-bottom: 60px;
+    gap: clamp(24px, 4vw, 40px);
+    margin-bottom: clamp(20px, 4vw, 32px);
     position: relative;
     z-index: 1;
 }
@@ -506,8 +506,8 @@ footer {
 }
 
 .footer-logo img {
-    width: 150px;
-    margin-bottom: 20px;
+    width: 120px;
+    margin-bottom: 14px;
 }
 
 .footer-links {
@@ -517,7 +517,7 @@ footer {
 
 .footer-links h3 {
     color: var(--primary-color);
-    margin-bottom: 25px;
+    margin-bottom: 16px;
     font-size: 1.5rem;
 }
 
@@ -577,6 +577,16 @@ footer {
 }
 
 /* Estilos para os cards de heróis */
+
+/* Lightbox das imagens dos heróis */
+.hero-lightbox { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; z-index: 9999; }
+.hero-lightbox.open { display: flex; }
+.hero-lightbox .hero-lightbox-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,.8); backdrop-filter: blur(2px); }
+.hero-lightbox .hero-lightbox-image { position: relative; max-width: 92vw; max-height: 90vh; border-radius: 10px; box-shadow: 0 24px 64px rgba(0,0,0,.5); z-index: 1; }
+.hero-lightbox .hero-lightbox-close { position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,.92); color: var(--primary-color); border: 0; border-radius: 999px; width: 40px; height: 40px; font-size: 22px; line-height: 40px; cursor: pointer; z-index: 2; box-shadow: 0 6px 18px rgba(0,0,0,.25); }
+
+/* Indicar clicável nos cards de heróis */
+.lp-values .hero-card .hero-image-container { cursor: zoom-in; }
 .hero-card {
   text-align: center;
 }
@@ -594,8 +604,10 @@ footer {
 .hero-image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
+  object-fit: contain; /* evita cortes */
+  object-position: center; /* centraliza horizontal e vertical */
+  transition: transform .3s ease;
+  display: block;
 }
 
 .hero-image:hover {
@@ -645,7 +657,7 @@ footer {
     .lp-header { position: sticky; top: 0; z-index: 1000; background: #fff; border-bottom: 1px solid rgba(0,0,0,.06); }
     .lp-header .lp-container { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 72px; }
     .lp-header nav { display: flex; align-items: center; }
-    .lp-header .lp-brand { display: flex; align-items: center; }
+    .lp-header .lp-brand { display: flex; align-items: center; margin-left: 14px; }
     .lp-header .lp-logo { height: 46px; width: auto; display: block; }
     .lp-header .nav-links { display: flex; align-items: center; gap: 20px; margin: 0; padding: 0; list-style: none; }
     .lp-header .nav-links li { list-style: none; margin: 0; padding: 0; }
@@ -813,7 +825,7 @@ footer {
 /* Ajuste: vídeos pequenos, alinhados em uma única linha no desktop */
 .lp-video-testimonials {
   display: grid;
-  grid-template-columns: repeat(3, 260px); /* largura menor e fixa */
+  grid-template-columns: repeat(3, 300px); /* aumentado de 260px para 300px */
   justify-content: center; /* centraliza o conjunto */
   gap: 16px 24px; /* linha x coluna */
   align-items: start;
@@ -830,20 +842,20 @@ footer {
 /* Imagens lado a lado (3 por linha) */
 .lp-cards-3 {
   display: grid;
-  grid-template-columns: repeat(3, 260px); /* 3 cards pequenos em linha */
+  grid-template-columns: repeat(3, 300px); /* aumentado o tamanho dos cards */
   justify-content: center; /* centraliza o grid dentro do container */
-  gap: 16px 24px;
+  gap: 20px 28px; /* um pouco mais de respiro */
 }
 
 /* Ajustes visuais dos cards menores */
 .hero-card { width: 100%; }
-.hero-card .hero-image-container { height: 160px; } /* reduz altura para proporção menor */
+.hero-card .hero-image-container { height: 200px; } /* aumenta altura do espaço da imagem */
 .hero-card h3 { margin-top: 8px; }
 
 /* Responsivo: 2 colunas entre 768–900px e 1 coluna abaixo de 768px */
 @media (max-width: 900px) and (min-width: 769px) {
   .lp-video-testimonials { grid-template-columns: repeat(2, 1fr); }
-  .lp-cards-3 { grid-template-columns: repeat(2, 1fr); }
+  .lp-cards-3 { grid-template-columns: repeat(2, 300px); }
 }
 @media (max-width: 768px) {
   .lp-video-testimonials { grid-template-columns: 1fr; }
@@ -888,13 +900,11 @@ footer {
   box-shadow: 0 12px 32px rgba(0,0,0,.08);
 }
 .lp-values .hero-card .hero-image-container {
-  height: 180px; /* um pouco mais alto que o atual */
-  margin-bottom: 1rem;
-  background: #f6f8fa;
-  border: 1px solid #edf1f5;
-  border-radius: 12px;
-  overflow: hidden;
-  position: relative;
+  /* já existia: height, margin, border, radius, overflow, position */
+  background: #ffffff; /* fundo branco para não parecer desalinhado nas bordas */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* centraliza perfeitamente */
 }
 .lp-values .hero-card .hero-image-container::after {
   content: "";
@@ -903,8 +913,17 @@ footer {
   opacity: 0; transition: opacity .25s ease;
 }
 .lp-values .hero-card:hover .hero-image-container::after { opacity: 1; }
-.lp-values .hero-card .hero-image { transition: transform .3s ease; }
-.lp-values .hero-card:hover .hero-image { transform: scale(1.06); }
+.lp-values .hero-card .hero-image {
+  width: auto;            /* deixa o browser calcular mantendo proporção */
+  height: auto;           
+  max-width: 100%;        /* não ultrapassa o container */
+  max-height: 100%;       /* ocupa a maior área possível sem cortar */
+  object-fit: contain;    /* garante sem cortes */
+  object-position: center;/* centraliza */
+  transition: transform .3s ease;
+  display: block;
+}
+.lp-values .hero-card:hover .hero-image { transform: none; }
 .lp-values .hero-card h3 {
   color: #0e2d18;
   margin: 8px 0 6px;
@@ -989,7 +1008,7 @@ footer {
 .lp-header { position: sticky; top: 0; z-index: 1000; background: #fff; border-bottom: 1px solid rgba(0,0,0,.06); }
 .lp-header .lp-container { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 72px; }
 .lp-header nav { display: flex; align-items: center; }
-.lp-header .lp-brand { display: flex; align-items: center; }
+.lp-header .lp-brand { display: flex; align-items: center; margin-left: 14px; }
 .lp-header .lp-logo { height: 46px; width: auto; display: block; }
 /* Espaçamento extra entre Depoimentos e a seção seguinte (Origem / vídeo principal) */
 #capitao-animais.lp-video { 
@@ -1026,7 +1045,7 @@ footer {
 
 /* ===== Navegação moderna: estilo e interações ===== */
 /* Links do menu com sublinhado animado e estado ativo (scroll spy) */
-.lp-header .nav-links { gap: 22px; }
+.lp-header .nav-links { gap: 22px; margin-right: 24px; }
 .lp-header .nav-links a { position: relative; padding: 10px 2px; color: #334; opacity: .92; transition: color .2s ease, opacity .2s ease; }
 .lp-header .nav-links a::after { content: ""; position: absolute; left: 0; bottom: -6px; width: 100%; height: 2px; border-radius: 2px; background: linear-gradient(90deg, #38d07a, #28a745); transform: scaleX(0); transform-origin: left; transition: transform .25s ease; }
 .lp-header .nav-links a:hover { color: #0e2d18; opacity: 1; }
@@ -1041,7 +1060,7 @@ footer {
 
 /* Mobile: lista vertical com espaçamento amigável e botões legíveis */
 @media (max-width: 992px) {
-  .lp-header .nav-links { gap: 18px; }
+  .lp-header .nav-links { gap: 18px; margin-right: 0; }
   .lp-header .nav-links a { color: #e8fff2; font-size: 1.05rem; }
   .lp-header .nav-links a::after { bottom: -4px; }
   .lp-header .nav-links .btn.btn-primary { width: 100%; justify-content: center; }
@@ -1111,9 +1130,18 @@ footer {
 #preco.lp-pricing, #pricing.lp-pricing {
   background: #f8faf9;
   color: #0e2d18;
-  margin-top: clamp(40px, 7vw, 128px);
-  padding-top: clamp(24px, 4vw, 56px);
-  padding-bottom: clamp(88px, 10vw, 160px);
+  margin-top: clamp(64px, 9vw, 160px);
+  padding-top: clamp(28px, 5vw, 64px);
+  padding-bottom: clamp(112px, 12vw, 192px);
+}
+
+/* Desktop: reforço de respiro para ficar bem visível */
+@media (min-width: 992px) {
+  #preco.lp-pricing, #pricing.lp-pricing {
+    margin-top: 120px !important;
+    padding-top: 48px !important;
+    padding-bottom: 240px !important;
+  }
 }
 
 #preco.lp-pricing .lp-container > h2 {
@@ -1132,46 +1160,50 @@ footer {
 
 #preco.lp-pricing .lp-cards-2-centered, #pricing.lp-pricing .lp-cards-2-centered {
   display: grid;
-  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  grid-template-columns: repeat(2, minmax(260px, 340px));
   gap: clamp(16px, 2.5vw, 28px);
   align-items: stretch;
   justify-content: center;
+  justify-items: center; /* centraliza os cards dentro das colunas */
 }
 
 @media (max-width: 768px) {
   #preco.lp-pricing .lp-cards-2-centered, #pricing.lp-pricing .lp-cards-2-centered { grid-template-columns: 1fr; }
+  #preco.lp-pricing .lp-price-card, #pricing.lp-pricing .lp-price-card { max-width: 520px; }
 }
 
 #preco.lp-pricing .lp-price-card, #pricing.lp-pricing .lp-price-card {
   background: #ffffff;
   color: #0e2d18;
   border: 1px solid rgba(14, 45, 24, 0.12);
-  border-radius: 16px;
-  padding: clamp(16px, 3vw, 28px);
-  box-shadow: 0 8px 24px rgba(14, 45, 24, 0.08);
+  border-radius: 14px;
+  padding: clamp(10px, 1.8vw, 18px);
+  box-shadow: 0 6px 18px rgba(14, 45, 24, 0.06);
   text-align: center;
   position: relative; /* para permitir ribbon */
   overflow: hidden;   /* evita overflow do ribbon */
+  max-width: 340px; /* limita a largura do card */
+  width: 100%;
 }
 
 #preco.lp-pricing .lp-price-card h3, #pricing.lp-pricing .lp-price-card h3 {
-  font-size: clamp(18px, 2.2vw, 22px);
-  margin: 0 0 12px;
+  font-size: clamp(15px, 1.8vw, 18px);
+  margin: 0 0 8px;
   color: #0e2d18;
   font-weight: 800;
 }
 
 #preco.lp-pricing .lp-price-card .lp-price {
-  font-size: clamp(22px, 3vw, 28px);
+  font-size: clamp(18px, 2.2vw, 22px);
   font-weight: 800;
   color: var(--accent-color);
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 #preco.lp-pricing .lp-price-card ul, #pricing.lp-pricing .lp-price-card ul {
   list-style: none;
   padding: 0;
-  margin: 0 0 12px;
+  margin: 0 0 8px;
   color: #2c3e50;
 }
 
@@ -1181,12 +1213,12 @@ footer {
   justify-content: center;
   align-items: center;
   color: #0e2d18;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 
 /* Ícones do pagamento com tamanho e cores sutis */
 #preco.lp-pricing .lp-payments i, #pricing.lp-pricing .lp-payments i {
-  font-size: 1.15rem;
+  font-size: 0.9rem;
   opacity: 0.95;
 }
 #preco.lp-pricing .lp-payments .fa-credit-card, #pricing.lp-pricing .lp-payments .fa-credit-card { color: #25D366; }
@@ -1196,7 +1228,9 @@ footer {
 /* Botão ocupa largura total dentro do card para melhor toque em mobile */
 #preco.lp-pricing .lp-price-card .btn, #pricing.lp-pricing .lp-price-card .btn {
   width: 100%;
-  margin-top: 8px;
+  margin-top: 6px;
+  font-size: 0.9rem;
+  padding: 10px 12px;
 }
 
 /* Card em destaque (featured) com borda/elevação e ribbon */
@@ -1206,17 +1240,7 @@ footer {
   transform: translateY(-2px);
 }
 #preco.lp-pricing .lp-price-card.lp-featured::before, #pricing.lp-pricing .lp-price-card.lp-featured::before {
-  content: 'Mais popular';
-  position: absolute;
-  top: 12px;
-  right: -40px;
-  background: linear-gradient(90deg, #25D366, #1ebe57);
-  color: #fff;
-  font-size: 12px;
-  font-weight: 700;
-  padding: 4px 60px;
-  transform: rotate(35deg);
-  box-shadow: 0 6px 16px rgba(37, 211, 102, .28);
+  content: none; /* remove o texto e o pseudo-elemento */
 }
 
 #preco.lp-pricing .lp-price-card .btn.btn-primary, #pricing.lp-pricing .lp-price-card .btn.btn-primary {
@@ -1224,72 +1248,3 @@ footer {
   color: #ffffff;
   border: none;
 }
-
-/* ===== Mobile-only hardened layout: text, header, video, spacing ===== */
-@media (max-width: 768px) {
-  html, body { font-size: 16px; line-height: 1.6; }
-  .container, .lp-container { padding-left: 16px; padding-right: 16px; }
-  section { padding: 56px 0; }
-
-  h1 { font-size: 2rem; line-height: 1.15; }
-  h2 { font-size: 1.5rem; }
-  p { font-size: 1rem; }
-
-  /* Header e navegação */
-  .lp-header { position: sticky; top: 0; background: #fff; }
-  .lp-header .lp-container { min-height: 64px; padding: 8px 16px; }
-  .lp-header .lp-logo { height: 40px; }
-  .hamburger { display: block; z-index: 1001; }
-  .lp-header .nav-links {
-    position: fixed; top: 0; right: -100%;
-    width: min(88vw, 360px); height: 100dvh;
-    background: var(--dark-bg);
-    display: flex; flex-direction: column; gap: 18px;
-    justify-content: flex-start; padding: 48px 28px; padding-top: 88px;
-    transition: right .45s ease; z-index: 1000;
-  }
-  .lp-header .nav-links.active { right: 0; }
-  .lp-header .nav-links a { color: var(--text-color); font-size: 1.05rem; }
-  body.no-scroll { overflow: hidden; }
-
-  /* Hero */
-  .lp-hero { padding: 56px 0 28px; }
-  .lp-hero-grid { grid-template-columns: 1fr; gap: 18px; }
-  .lp-hero .lp-hero-copy { text-align: center; max-width: 600px; margin: 0 auto; }
-  .lp-hero .lp-hero-image { max-width: 240px; margin: 0 auto; }
-  .hero-buttons { flex-direction: column; gap: 12px; }
-  .hero-buttons .btn { width: 100%; }
-
-  /* Vídeo */
-  .lp-video .lp-video-container { max-width: 100%; margin: 0; }
-
-  /* Grades (cards e vídeos) */
-  .lp-video-testimonials, .lp-cards-3 { grid-template-columns: 1fr; gap: 14px; }
-}
-
-/* Toggle de títulos desktop/mobile */
-.title-desktop { display: inline; }
-.title-mobile { display: none; }
-@media (max-width: 768px) {
-  .title-desktop { display: none !important; }
-  .title-mobile { display: block !important; font-weight: 800; text-align: center; }
-  .title-mobile span { display: block; white-space: nowrap; font-size: clamp(2.2rem, 5.6vw + 0.6rem, 3rem); line-height: 1.12; }
-}
-
-/* Quebras e leitura melhores no subtítulo do herói (mobile) */
-@media (max-width: 768px) {
-  .lp-hero .lp-sub { 
-    display: flex; 
-    flex-wrap: wrap; 
-    justify-content: center; 
-    gap: 6px 8px; 
-    text-align: center;
-  }
-  .lp-hero .lp-sub .line { white-space: nowrap; }
-  .lp-hero .lp-sub .sep { display: none; }
- 
-  /* Título principal (mobile) - 2 linhas forçadas */
-  .lp-hero .lp-hero-copy h1 { font-size: clamp(2.3rem, 5.8vw + 0.6rem, 3rem); line-height: 1.12; letter-spacing: -0.01em; margin-bottom: 10px; }
-  .lp-hero .lp-hero-copy h1 span { display: block; white-space: nowrap; }
-  .lp-hero .lp-hero-copy h1 br { display: none; }
- }
