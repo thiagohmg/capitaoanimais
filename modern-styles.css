@@ -1224,3 +1224,72 @@ footer {
   color: #ffffff;
   border: none;
 }
+
+/* ===== Mobile-only hardened layout: text, header, video, spacing ===== */
+@media (max-width: 768px) {
+  html, body { font-size: 16px; line-height: 1.6; }
+  .container, .lp-container { padding-left: 16px; padding-right: 16px; }
+  section { padding: 56px 0; }
+
+  h1 { font-size: 2rem; line-height: 1.15; }
+  h2 { font-size: 1.5rem; }
+  p { font-size: 1rem; }
+
+  /* Header e navegação */
+  .lp-header { position: sticky; top: 0; background: #fff; }
+  .lp-header .lp-container { min-height: 64px; padding: 8px 16px; }
+  .lp-header .lp-logo { height: 40px; }
+  .hamburger { display: block; z-index: 1001; }
+  .lp-header .nav-links {
+    position: fixed; top: 0; right: -100%;
+    width: min(88vw, 360px); height: 100dvh;
+    background: var(--dark-bg);
+    display: flex; flex-direction: column; gap: 18px;
+    justify-content: flex-start; padding: 48px 28px; padding-top: 88px;
+    transition: right .45s ease; z-index: 1000;
+  }
+  .lp-header .nav-links.active { right: 0; }
+  .lp-header .nav-links a { color: var(--text-color); font-size: 1.05rem; }
+  body.no-scroll { overflow: hidden; }
+
+  /* Hero */
+  .lp-hero { padding: 56px 0 28px; }
+  .lp-hero-grid { grid-template-columns: 1fr; gap: 18px; }
+  .lp-hero .lp-hero-copy { text-align: center; max-width: 600px; margin: 0 auto; }
+  .lp-hero .lp-hero-image { max-width: 240px; margin: 0 auto; }
+  .hero-buttons { flex-direction: column; gap: 12px; }
+  .hero-buttons .btn { width: 100%; }
+
+  /* Vídeo */
+  .lp-video .lp-video-container { max-width: 100%; margin: 0; }
+
+  /* Grades (cards e vídeos) */
+  .lp-video-testimonials, .lp-cards-3 { grid-template-columns: 1fr; gap: 14px; }
+}
+
+/* Toggle de títulos desktop/mobile */
+.title-desktop { display: inline; }
+.title-mobile { display: none; }
+@media (max-width: 768px) {
+  .title-desktop { display: none !important; }
+  .title-mobile { display: block !important; font-weight: 800; text-align: center; }
+  .title-mobile span { display: block; white-space: nowrap; font-size: clamp(2.2rem, 5.6vw + 0.6rem, 3rem); line-height: 1.12; }
+}
+
+/* Quebras e leitura melhores no subtítulo do herói (mobile) */
+@media (max-width: 768px) {
+  .lp-hero .lp-sub { 
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 6px 8px; 
+    text-align: center;
+  }
+  .lp-hero .lp-sub .line { white-space: nowrap; }
+  .lp-hero .lp-sub .sep { display: none; }
+ 
+  /* Título principal (mobile) - 2 linhas forçadas */
+  .lp-hero .lp-hero-copy h1 { font-size: clamp(2.3rem, 5.8vw + 0.6rem, 3rem); line-height: 1.12; letter-spacing: -0.01em; margin-bottom: 10px; }
+  .lp-hero .lp-hero-copy h1 span { display: block; white-space: nowrap; }
+  .lp-hero .lp-hero-copy h1 br { display: none; }
+ }
