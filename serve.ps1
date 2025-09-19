@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Minimal static HTTP server using TcpListener (no admin/urlacl required)
 param(
   [int]$Port = 8000
@@ -107,28 +106,6 @@ while ($true) {
   } finally {
     try { $client.Close() } catch {}
   }
-=======
-# Minimal static HTTP server using TcpListener (no admin/urlacl required)
-param(
-  [int]$Port = 8000
-)
-
-$ErrorActionPreference = 'Stop'
-$root = $PSScriptRoot
-if (-not $root) { $root = Split-Path -Parent $MyInvocation.MyCommand.Path }
-
-# Start listener with IPv6 DualMode when available (accepts IPv4 and IPv6)
-try {
-  $listener = [System.Net.Sockets.TcpListener]::new([System.Net.IPAddress]::IPv6Any, $Port)
-  try { $listener.Server.DualMode = $true } catch {}
-  $listener.Start()
-  Write-Host ("Serving {0} at http://localhost:{1}/" -f $root, $Port) -ForegroundColor Green
-} catch {
-  # Fallback to IPv4 only
-  $listener = [System.Net.Sockets.TcpListener]::new([System.Net.IPAddress]::Any, $Port)
-  $listener.Start()
-  Write-Host ("Serving {0} at http://127.0.0.1:{1}/" -f $root, $Port) -ForegroundColor Green
-}
 
 function Get-ContentType($ext) {
   switch ($ext.ToLower()) {
@@ -216,5 +193,4 @@ while ($true) {
   } finally {
     try { $client.Close() } catch {}
   }
->>>>>>> 5bc1fc1e8effdbd5b568b6231418a93eb2a8beaa
 }
