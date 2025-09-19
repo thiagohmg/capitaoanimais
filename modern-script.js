@@ -121,6 +121,37 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
+    // Menu inferior mobile - indicação de seção ativa
+    function updateMobileNavActive() {
+        const sections = document.querySelectorAll('section[id]');
+        const mobileNavItems = document.querySelectorAll('.mobile-nav-item[href^="#"]');
+        
+        let currentSection = '';
+        const scrollPosition = window.scrollY + 100;
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            
+            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                currentSection = section.getAttribute('id');
+            }
+        });
+        
+        mobileNavItems.forEach(item => {
+            item.classList.remove('active');
+            if (item.getAttribute('href') === `#${currentSection}`) {
+                item.classList.add('active');
+            }
+        });
+    }
+    
+    // Atualizar menu ativo ao rolar (apenas se menu mobile existir)
+    if (document.querySelector('.mobile-bottom-nav')) {
+        window.addEventListener('scroll', updateMobileNavActive);
+        updateMobileNavActive(); // Executar uma vez no carregamento
+    }
+    
     // Efeito de partículas no fundo (opcional)
     const particlesContainer = document.getElementById('particles');
     if (particlesContainer) {
