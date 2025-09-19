@@ -11,22 +11,15 @@
   ],
   "headers": [
     {
-<<<<<<< HEAD
       "source": "/images/(.*)",
-=======
-      "source": "/(.*)",
->>>>>>> 5bc1fc1e8effdbd5b568b6231418a93eb2a8beaa
       "headers": [
         {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
-<<<<<<< HEAD
         },
         {
           "key": "Content-Type",
           "value": "image/*"
-=======
->>>>>>> 5bc1fc1e8effdbd5b568b6231418a93eb2a8beaa
         }
       ]
     },
@@ -38,7 +31,6 @@
           "value": "public, max-age=0, must-revalidate"
         }
       ]
-<<<<<<< HEAD
     },
     {
       "source": "/(.*).css",
@@ -57,8 +49,6 @@
           "value": "public, max-age=31536000, immutable"
         }
       ]
-=======
->>>>>>> 5bc1fc1e8effdbd5b568b6231418a93eb2a8beaa
     }
   ]
 }
