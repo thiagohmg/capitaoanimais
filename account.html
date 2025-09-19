@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minha Conta | Capitão Animais</title>
+  <link rel="stylesheet" href="modern-styles.css">
+  <script>
+    async function checkSession() {
+      const q = new URLSearchParams(location.search);
+      const token = q.get('token');
+      if (token) {
+        // Se veio de link mágico, trocar pelo cookie de sessão via verify-token
+        try {
+          const resp = await fetch('/api/verify-token', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ token }) });
+          await resp.json();
+          // Mesmo com erro, seguimos para checar sessão
+        } catch(e) {}
+      }
+      const resp2 = await fetch('/api/session');
+      const data = await resp2.json();
+      const info = document.getElementById('account-info');
+      const actions = document.getElementById('account-actions');
+      if (data.authenticated) {
+        info.textContent = `Olá, ${data.name || data.email}!`;
+        actions.style.display = 'block';
+      } else {
+        info.textContent = 'Você não está autenticado. Volte para a página inicial e crie sua conta.';
+      }
+    }
+    async function doLogout(){
+      await fetch('/api/logout', { method: 'POST' });
+      location.href = '/modern-index.html';
+    }
+    document.addEventListener('DOMContentLoaded', checkSession);
+  </script>
+</head>
+<body class="lp-v2">
+  <header class="lp-header">
+    <div class="lp-container">
+      <a href="/modern-index.html" class="lp-brand">
+        <img src="images/logo-header.png" alt="Capitão Animais" class="lp-logo"/>
+      </a>
+      <ul class="nav-links">
+        <li><a href="modern-index.html#home">Início</a></li>
+        <li><a href="modern-index.html#product">Escritor</a></li>
+        <li><a href="modern-index.html#value">Super heróis</a></li>
+        <li><a href="modern-index.html#trust">Como surgiu a ideia</a></li>
+        <li><a href="modern-index.html#pricing">Preços</a></li>
+        <li><a href="modern-index.html#signup" class="btn btn-primary">Quero ganhar um livro</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <section class="lp-section">
+    <div class="lp-container">
+      <h1>Minha Conta</h1>
+      <p id="account-info">Carregando...</p>
+      <div id="account-actions" style="display:none">
+        <button class="btn btn-outline" onclick="doLogout()">Sair</button>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

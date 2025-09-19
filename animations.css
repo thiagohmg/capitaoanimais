@@ -1,0 +1,309 @@
+/* Animações para a landing page moderna do Capitão Animais */
+
+/* Animação de partículas flutuantes */
+.particles-container {
+    position:fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.particle {
+    position: fixed;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    opacity: 0.2;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) translateX(0);
+    }
+    25% {
+        transform: translateY(-30px) translateX(15px);
+    }
+    50% {
+        transform: translateY(-15px) translateX(30px);
+    }
+    75% {
+        transform: translateY(30px) translateX(15px);
+    }
+}
+
+/* Animação de fade-in para elementos */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animação de pulsação para botões de destaque */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 8px 25px rgba(76, 175, 80, 0.6);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+    }
+}
+
+.btn-pulse {
+    animation: pulse 2s infinite;
+}
+
+/* Animação de brilho para elementos de destaque */
+@keyframes glow {
+    0%, 100% {
+        text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+    }
+    50% {
+        text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.6);
+    }
+}
+
+.text-glow {
+    animation: glow 3s infinite;
+    color: var(--accent-color);
+}
+
+/* Efeito de gradiente animado */
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.gradient-bg {
+    background: linear-gradient(-45deg, var(--primary-color), var(--dark-bg-lighter), var(--secondary-color), var(--dark-bg));
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
+
+/* Efeito de digitação para textos */
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--accent-color) }
+}
+
+.typing-effect {
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 3px solid var(--accent-color);
+    width: 0;
+    animation: 
+        typing 3.5s steps(40, end) forwards,
+        blink-caret 0.75s step-end infinite;
+}
+
+/* Efeito de hover para cards */
+.hover-float {
+    transition: transform 0.3s ease;
+}
+
+.hover-float:hover {
+    transform: translateY(-10px);
+}
+
+/* Efeito de zoom suave para imagens */
+.zoom-effect {
+    overflow: hidden;
+}
+
+.zoom-effect img {
+    transition: transform 0.5s ease;
+}
+
+.zoom-effect:hover img {
+    transform: scale(1.1);
+}
+
+/* Efeito de destaque para texto */
+.highlight-text {
+    position: relative;
+    display: inline-block;
+}
+
+.highlight-text:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 30%;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary-color);
+    opacity: 0.3;
+    z-index: -1;
+    transform: skewX(-15deg);
+}
+
+/* Efeito de revelação para seções */
+.reveal-section {
+    position: relative;
+    transform: translateY(50px);
+    opacity: 0;
+    transition: all 1s ease;
+}
+
+.reveal-section.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Efeito de borda brilhante */
+@keyframes borderGlow {
+    0%, 100% {
+        box-shadow: 0 0 5px var(--accent-color);
+    }
+    50% {
+        box-shadow: 0 0 20px var(--accent-color), 0 0 30px var(--accent-color);
+    }
+}
+
+.border-glow {
+    border: 2px solid var(--accent-color);
+    animation: borderGlow 3s infinite;
+}
+
+/* Efeito de fundo cinematográfico com linhas */
+.cinematic-bg {
+    position: relative;
+    overflow: hidden;
+}
+
+.cinematic-bg:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.05) 2px,
+        rgba(0, 0, 0, 0.05) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.3;
+}
+
+/* Efeito de vinheta cinematográfica */
+.vignette {
+    position: relative;
+}
+
+.vignette:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.8);
+    pointer-events: none;
+}
+
+/* Efeito de texto 3D */
+.text-3d {
+    text-shadow: 
+        1px 1px 1px var(--dark-bg),
+        2px 2px 1px var(--dark-bg-lighter),
+        3px 3px 1px var(--primary-color),
+        4px 4px 1px var(--secondary-color);
+    letter-spacing: 2px;
+}
+
+/* Efeito de texto com brilho neon */
+.neon-text {
+    color: var(--text-color);
+    text-shadow:
+        0 0 5px var(--text-color),
+        0 0 10px var(--text-color),
+        0 0 20px var(--primary-color),
+        0 0 40px var(--primary-color),
+        0 0 80px var(--primary-color);
+}
+
+/* Efeito de botão com brilho */
+.glow-button {
+    position: relative;
+    overflow: hidden;
+}
+
+.glow-button:after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.glow-button:hover:after {
+    opacity: 1;
+}
+
+/* Efeito de rolagem para imagens de fundo */
+.parallax-bg {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Efeito de máscara para imagens */
+.image-mask {
+    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+}
+
+/* Efeito de distorção para hover */
+@keyframes distort {
+    0% {
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+    50% {
+        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    }
+    100% {
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+}
+
+.blob-shape {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    animation: distort 8s ease-in-out infinite;
+    overflow: hidden;
+}
