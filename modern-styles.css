@@ -1348,8 +1348,18 @@ footer {
 /* Garantia extra para qualquer UL do menu */
 .nav-links, .nav-links li { list-style: none; margin: 0; padding: 0; }
 
-/* Mobile: menu inferior fixo moderno */
-@media (max-width: 992px) {
+/* Esconder menu inferior mobile em desktop */
+.mobile-bottom-nav {
+  display: none;
+}
+
+/* Esconder padding bottom do body em desktop */
+body {
+  padding-bottom: 0;
+}
+
+/* Mobile: menu inferior fixo moderno - APENAS para telas muito pequenas */
+@media (max-width: 768px) {
   /* Esconder hamburger menu */
   .hamburger { display: none !important; }
   
