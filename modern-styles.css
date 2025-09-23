@@ -3289,11 +3289,10 @@ footer {
 
 .social-icon {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   border-radius: 15px;
   text-decoration: none;
   transition: all 0.3s ease;
@@ -3320,7 +3319,6 @@ footer {
 
 .social-icon i {
   font-size: 1.8rem;
-  margin-bottom: 0.3rem;
   transition: transform 0.3s ease;
 }
 
@@ -3371,16 +3369,12 @@ footer {
   }
   
   .social-icon {
-    width: 70px;
-    height: 70px;
+    width: 50px;
+    height: 50px;
   }
   
   .social-icon i {
-    font-size: 1.5rem;
-  }
-  
-  .social-icon span {
-    font-size: 0.6rem;
+    font-size: 1.3rem;
   }
 }
 
@@ -3390,12 +3384,12 @@ footer {
   }
   
   .social-icon {
-    width: 60px;
-    height: 60px;
+    width: 45px;
+    height: 45px;
   }
   
   .social-icon i {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
   }
 }
 
