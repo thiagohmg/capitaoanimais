@@ -3292,9 +3292,9 @@ footer {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 120px;
-  height: 120px;
-  border-radius: 20px;
+  width: 80px;
+  height: 80px;
+  border-radius: 15px;
   text-decoration: none;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
@@ -3319,13 +3319,13 @@ footer {
 }
 
 .social-icon i {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+  margin-bottom: 0.3rem;
   transition: transform 0.3s ease;
 }
 
 .social-icon span {
-  font-size: 0.9rem;
+  font-size: 0.7rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -3371,16 +3371,16 @@ footer {
   }
   
   .social-icon {
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
   }
   
   .social-icon i {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
   
   .social-icon span {
-    font-size: 0.8rem;
+    font-size: 0.6rem;
   }
 }
 
@@ -3390,12 +3390,12 @@ footer {
   }
   
   .social-icon {
-    width: 90px;
-    height: 90px;
+    width: 60px;
+    height: 60px;
   }
   
   .social-icon i {
-    font-size: 1.8rem;
+    font-size: 1.3rem;
   }
 }
 
